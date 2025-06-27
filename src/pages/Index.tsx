@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Leaf, Trash, HandCoins, HandHeart, Gift, Recycle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import PhotoCarousel from "@/components/PhotoCarousel";
 
 const Index = () => {
   const [quizStep, setQuizStep] = useState(0);
@@ -220,6 +220,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Section Carrousel Photo */}
+      <PhotoCarousel />
 
       {/* Section Quiz */}
       <section id="quiz" className="py-20 px-4 bg-gradient-to-r from-green-100 to-blue-100">
