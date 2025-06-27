@@ -72,7 +72,7 @@ const Index = () => {
     const isCorrect = answerIndex === quizQuestions[quizStep].correctAnswer;
     const newScore = quizScore + (isCorrect ? 1 : 0);
     setQuizScore(newScore);
-    
+
     if (quizStep + 1 < quizQuestions.length) {
       setQuizStep(quizStep + 1);
     } else {
@@ -97,25 +97,25 @@ const Index = () => {
   };
 
   const getQuizResult = () => {
-    if (quizScore === 10) return { 
-      level: "Ambassadeur du Sans Plastique", 
-      color: "bg-green-500", 
-      message: "Félicitations 🎉 ! Tu es un véritable ambassadeur du sans plastique !" 
+    if (quizScore === 10) return {
+      level: "Ambassadeur du Sans Plastique",
+      color: "bg-green-500",
+      message: "Félicitations 🎉 ! Tu es un véritable ambassadeur du sans plastique !"
     };
-    if (quizScore >= 7) return { 
-      level: "Expert Éco-responsable", 
-      color: "bg-blue-500", 
-      message: "Bravo ! Tu adoptes déjà de très bonnes habitudes 👏" 
+    if (quizScore >= 7) return {
+      level: "Expert Éco-responsable",
+      color: "bg-blue-500",
+      message: "Bravo ! Tu adoptes déjà de très bonnes habitudes 👏"
     };
-    if (quizScore >= 4) return { 
-      level: "Guerrier Vert", 
-      color: "bg-orange-500", 
-      message: "Tu es sur la bonne voie ! Quelques efforts de plus et tu seras un pro du zéro plastique 💪" 
+    if (quizScore >= 4) return {
+      level: "Guerrier Vert",
+      color: "bg-orange-500",
+      message: "Tu es sur la bonne voie ! Quelques efforts de plus et tu seras un pro du zéro plastique 💪"
     };
-    return { 
-      level: "Apprenti Écolo", 
-      color: "bg-purple-500", 
-      message: "Tu as encore beaucoup à apprendre, mais chaque petit geste compte ! 🌱" 
+    return {
+      level: "Apprenti Écolo",
+      color: "bg-purple-500",
+      message: "Tu as encore beaucoup à apprendre, mais chaque petit geste compte ! 🌱"
     };
   };
 
@@ -131,35 +131,35 @@ const Index = () => {
               <span className="text-sm font-medium">Campagne Environnementale</span>
             </div>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-green-200 bg-clip-text text-transparent leading-tight">
             Moins de plastique,<br />Plus de vie
           </h1>
-          
+
           <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Chaque minute, l'équivalent d'un camion poubelle de plastique finit dans nos océans. 
+            Chaque minute, l'équivalent d'un camion poubelle de plastique finit dans nos océans.
             Ensemble, inversons la tendance et préservons la vie marine pour les générations futures.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Agir Maintenant
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-md"
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-black hover:scale-105 px-8 py-4 text-lg rounded-full backdrop-blur-md hover:shadow-xl transition-all duration-300"
               onClick={() => document.getElementById('facts')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Découvrir les Chiffres
             </Button>
           </div>
         </div>
-        
+
         {/* Éléments flottants */}
         <div className="absolute top-20 left-10 w-20 h-20 bg-green-400/20 rounded-full animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-16 h-16 bg-blue-400/20 rounded-full animate-pulse delay-1000"></div>
@@ -177,7 +177,7 @@ const Index = () => {
               Comprendre l'ampleur du problème nous aide à réaliser pourquoi chaque petit geste compte
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 border-0 bg-gradient-to-br from-red-50 to-red-100">
               <CardHeader>
@@ -246,8 +246,8 @@ const Index = () => {
                         Quiz Écolo
                       </Badge>
                     </div>
-                    <Progress 
-                      value={(quizStep / quizQuestions.length) * 100} 
+                    <Progress
+                      value={(quizStep / quizQuestions.length) * 100}
                       className="h-2"
                     />
                   </div>
@@ -274,28 +274,28 @@ const Index = () => {
                   <div className={`w-20 h-20 ${getQuizResult().color} rounded-full flex items-center justify-center mx-auto mb-6`}>
                     <Gift className="h-10 w-10 text-white" />
                   </div>
-                  
+
                   <h3 className="text-3xl font-bold mb-4 text-gray-800">
                     Vous êtes un {getQuizResult().level} !
                   </h3>
-                  
+
                   <p className="text-lg text-gray-600 mb-4">
                     Score : {quizScore}/10 points
                   </p>
-                  
+
                   <p className="text-lg text-gray-600 mb-6">
                     {getQuizResult().message}
                   </p>
-                  
+
                   <div className="space-y-4">
-                    <Button 
+                    <Button
                       onClick={resetQuiz}
-                      variant="outline" 
+                      variant="outline"
                       className="mr-4"
                     >
                       Refaire le Quiz
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => document.getElementById('tips')?.scrollIntoView({ behavior: 'smooth' })}
                       className="bg-green-500 hover:bg-green-600"
                     >
@@ -396,7 +396,7 @@ const Index = () => {
           {!hasPledged ? (
             <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-md border-white/20">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6">Je m'engage pour moins de plastique</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">Je m'engage pour moins de plastique</h3>
                 <div className="space-y-4">
                   <input
                     type="text"
@@ -405,7 +405,7 @@ const Index = () => {
                     onChange={(e) => setPledgeName(e.target.value)}
                     className="w-full p-3 rounded-lg border-0 bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
                   />
-                  <Button 
+                  <Button
                     onClick={handlePledge}
                     className="w-full bg-green-500 hover:bg-green-600 text-white py-3 text-lg font-semibold rounded-lg"
                     disabled={!pledgeName.trim()}
@@ -413,7 +413,7 @@ const Index = () => {
                     Prendre Mon Engagement
                   </Button>
                 </div>
-                
+
                 <div className="mt-6 text-sm text-white/80">
                   <p className="mb-2">Je m'engage à :</p>
                   <ul className="text-left space-y-1">
@@ -437,13 +437,13 @@ const Index = () => {
                 Ensemble, nous créons une planète plus propre et plus saine pour les générations futures.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  variant="outline" 
-                  className="border-white/30 text-white hover:bg-white/10"
+                <Button
+                  variant="outline"
+                  className="border-white/30 text-black hover:bg-white/10"
                 >
                   Partager sur les Réseaux
                 </Button>
-                <Button 
+                <Button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="bg-white/20 hover:bg-white/30 backdrop-blur-md"
                 >
