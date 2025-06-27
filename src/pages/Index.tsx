@@ -40,6 +40,31 @@ const Index = () => {
       question: "Que faire avec les contenants plastique alimentaires vides ?",
       options: ["Les jeter à la poubelle", "Les réutiliser pour le stockage", "Les brûler", "Les enterrer dans le jardin"],
       correctAnswer: 1
+    },
+    {
+      question: "Dans la salle de bain, quelle alternative permet de réduire le plastique ?",
+      options: ["Utiliser plus de produits jetables", "Passer aux savons et shampoings solides", "Acheter des flacons plus grands", "Utiliser des lingettes"],
+      correctAnswer: 1
+    },
+    {
+      question: "Pour réduire l'impact numérique, quel geste est le plus efficace ?",
+      options: ["Changer d'appareil chaque année", "Garder ses appareils le plus longtemps possible", "Laisser tous ses appareils allumés", "Acheter toujours le dernier modèle"],
+      correctAnswer: 1
+    },
+    {
+      question: "Comment bien trier ses déchets plastique pour le recyclage ?",
+      options: ["Tout mettre dans la même poubelle", "Nettoyer les emballages avant de les trier", "Les jeter dans la nature", "Les brûler soi-même"],
+      correctAnswer: 1
+    },
+    {
+      question: "En cuisine, quelle alternative remplace efficacement le film plastique ?",
+      options: ["Papier aluminium", "Bee wrap (emballage à la cire d'abeille)", "Sacs plastique", "Papier journal"],
+      correctAnswer: 1
+    },
+    {
+      question: "Quelle est la meilleure façon de faire ses courses zéro déchet ?",
+      options: ["Prendre beaucoup de sacs plastique gratuits", "Apporter ses propres contenants et sacs", "Acheter uniquement des produits emballés", "Commander en ligne"],
+      correctAnswer: 1
     }
   ];
 
@@ -72,25 +97,25 @@ const Index = () => {
   };
 
   const getQuizResult = () => {
-    if (quizScore === 5) return { 
-      level: "Expert Éco-responsable", 
+    if (quizScore === 10) return { 
+      level: "Ambassadeur du Sans Plastique", 
       color: "bg-green-500", 
-      message: "Félicitations ! Vous maîtrisez parfaitement les gestes éco-responsables !" 
+      message: "Félicitations 🎉 ! Tu es un véritable ambassadeur du sans plastique !" 
     };
-    if (quizScore >= 3) return { 
-      level: "Guerrier Vert", 
+    if (quizScore >= 7) return { 
+      level: "Expert Éco-responsable", 
       color: "bg-blue-500", 
-      message: "Très bien ! Vous êtes sur la bonne voie, continuez vos efforts !" 
+      message: "Bravo ! Tu adoptes déjà de très bonnes habitudes 👏" 
     };
-    if (quizScore >= 1) return { 
-      level: "Apprenti Écolo", 
+    if (quizScore >= 4) return { 
+      level: "Guerrier Vert", 
       color: "bg-orange-500", 
-      message: "C'est un bon début ! Il y a encore quelques gestes à apprendre." 
+      message: "Tu es sur la bonne voie ! Quelques efforts de plus et tu seras un pro du zéro plastique 💪" 
     };
     return { 
-      level: "Futur Protecteur", 
+      level: "Apprenti Écolo", 
       color: "bg-purple-500", 
-      message: "Chaque voyage commence par un premier pas ! Découvrez nos conseils." 
+      message: "Tu as encore beaucoup à apprendre, mais chaque petit geste compte ! 🌱" 
     };
   };
 
@@ -255,7 +280,7 @@ const Index = () => {
                   </h3>
                   
                   <p className="text-lg text-gray-600 mb-4">
-                    Score : {quizScore}/5 points
+                    Score : {quizScore}/10 points
                   </p>
                   
                   <p className="text-lg text-gray-600 mb-6">
