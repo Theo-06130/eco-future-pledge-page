@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Leaf, Trash, HandCoins, HandHeart, Gift } from "lucide-react";
+import { Leaf, Trash, HandCoins, HandHeart, Gift, Recycle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -17,24 +17,35 @@ const Index = () => {
 
   const quizQuestions = [
     {
-      question: "How many plastic bags do you use per week?",
-      options: ["0-2 bags", "3-5 bags", "6-10 bags", "More than 10"],
-      scores: [3, 2, 1, 0]
+      question: "Quelle est la meilleure alternative aux sacs plastique jetables ?",
+      options: ["Sacs en papier", "Sacs réutilisables en tissu", "Sacs biodégradables", "Cartons"],
+      correctAnswer: 1
     },
     {
-      question: "Do you carry a reusable water bottle?",
-      options: ["Always", "Sometimes", "Rarely", "Never"],
-      scores: [3, 2, 1, 0]
+      question: "Combien de temps met une bouteille plastique à se décomposer dans la nature ?",
+      options: ["50 ans", "100 ans", "450 ans", "1000 ans"],
+      correctAnswer: 2
     },
     {
-      question: "How often do you choose products with minimal packaging?",
-      options: ["Always", "Often", "Sometimes", "Never"],
-      scores: [3, 2, 1, 0]
+      question: "Quel geste simple permet d'éviter les emballages plastique au supermarché ?",
+      options: ["Acheter en vrac", "Choisir les produits les moins chers", "Prendre des sacs plastique gratuits", "Acheter en grande quantité"],
+      correctAnswer: 0
+    },
+    {
+      question: "Comment remplacer les bouteilles d'eau plastique au quotidien ?",
+      options: ["Boire moins d'eau", "Utiliser une gourde réutilisable", "Acheter de l'eau en canettes", "Boire uniquement du robinet"],
+      correctAnswer: 1
+    },
+    {
+      question: "Que faire avec les contenants plastique alimentaires vides ?",
+      options: ["Les jeter à la poubelle", "Les réutiliser pour le stockage", "Les brûler", "Les enterrer dans le jardin"],
+      correctAnswer: 1
     }
   ];
 
   const handleQuizAnswer = (answerIndex: number) => {
-    const newScore = quizScore + quizQuestions[quizStep].scores[answerIndex];
+    const isCorrect = answerIndex === quizQuestions[quizStep].correctAnswer;
+    const newScore = quizScore + (isCorrect ? 1 : 0);
     setQuizScore(newScore);
     
     if (quizStep + 1 < quizQuestions.length) {
@@ -54,38 +65,55 @@ const Index = () => {
     if (pledgeName.trim()) {
       setHasPledged(true);
       toast({
-        title: "Thank you for your pledge!",
-        description: `Welcome to the movement, ${pledgeName}! Together we can make a difference.`,
+        title: "Merci pour votre engagement !",
+        description: `Bienvenue dans le mouvement, ${pledgeName} ! Ensemble, nous pouvons faire la différence.`,
       });
     }
   };
 
   const getQuizResult = () => {
-    if (quizScore >= 7) return { level: "Eco Champion", color: "bg-green-500", message: "You're already making a huge difference!" };
-    if (quizScore >= 4) return { level: "Green Warrior", color: "bg-blue-500", message: "You're on the right track! Keep it up." };
-    return { level: "Earth Protector", color: "bg-orange-500", message: "Every journey starts with a single step!" };
+    if (quizScore === 5) return { 
+      level: "Expert Éco-responsable", 
+      color: "bg-green-500", 
+      message: "Félicitations ! Vous maîtrisez parfaitement les gestes éco-responsables !" 
+    };
+    if (quizScore >= 3) return { 
+      level: "Guerrier Vert", 
+      color: "bg-blue-500", 
+      message: "Très bien ! Vous êtes sur la bonne voie, continuez vos efforts !" 
+    };
+    if (quizScore >= 1) return { 
+      level: "Apprenti Écolo", 
+      color: "bg-orange-500", 
+      message: "C'est un bon début ! Il y a encore quelques gestes à apprendre." 
+    };
+    return { 
+      level: "Futur Protecteur", 
+      color: "bg-purple-500", 
+      message: "Chaque voyage commence par un premier pas ! Découvrez nos conseils." 
+    };
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-teal-50">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-teal-700 text-white overflow-hidden">
+      {/* Section Héro */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 py-16 bg-gradient-to-br from-green-600 via-blue-700 to-teal-700 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in">
           <div className="mb-8">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 mb-6">
               <Leaf className="h-5 w-5 text-green-300" />
-              <span className="text-sm font-medium">Environmental Campaign</span>
+              <span className="text-sm font-medium">Campagne Environnementale</span>
             </div>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-green-200 bg-clip-text text-transparent leading-tight">
-            Less Plastic,<br />More Future
+            Moins de plastique,<br />Plus de vie
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-            Every minute, a garbage truck of plastic enters our oceans. 
-            But together, we can turn the tide and save marine life for future generations.
+            Chaque minute, l'équivalent d'un camion poubelle de plastique finit dans nos océans. 
+            Ensemble, inversons la tendance et préservons la vie marine pour les générations futures.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -94,7 +122,7 @@ const Index = () => {
               className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Take Action Now
+              Agir Maintenant
             </Button>
             <Button 
               variant="outline" 
@@ -102,26 +130,26 @@ const Index = () => {
               className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-md"
               onClick={() => document.getElementById('facts')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Learn the Facts
+              Découvrir les Chiffres
             </Button>
           </div>
         </div>
         
-        {/* Floating elements */}
+        {/* Éléments flottants */}
         <div className="absolute top-20 left-10 w-20 h-20 bg-green-400/20 rounded-full animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-16 h-16 bg-blue-400/20 rounded-full animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-20 w-12 h-12 bg-teal-400/20 rounded-full animate-pulse delay-500"></div>
       </section>
 
-      {/* Facts Section */}
+      {/* Section Chiffres Clés */}
       <section id="facts" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              The Plastic Crisis in Numbers
+              La Crise du Plastique en Chiffres
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Understanding the scale helps us appreciate why every small action matters
+              Comprendre l'ampleur du problème nous aide à réaliser pourquoi chaque petit geste compte
             </p>
           </div>
           
@@ -131,11 +159,11 @@ const Index = () => {
                 <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trash className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-3xl font-bold text-red-600">8 Million</CardTitle>
-                <CardDescription className="text-lg">Tons of plastic enter oceans yearly</CardDescription>
+                <CardTitle className="text-3xl font-bold text-red-600">8 Millions</CardTitle>
+                <CardDescription className="text-lg">de tonnes de plastique dans les océans chaque année</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">That's equivalent to dumping a garbage truck of plastic into the ocean every minute.</p>
+                <p className="text-gray-600">Cela équivaut à déverser un camion poubelle de plastique dans l'océan chaque minute.</p>
               </CardContent>
             </Card>
 
@@ -145,10 +173,10 @@ const Index = () => {
                   <HandCoins className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-3xl font-bold text-orange-600">1 Million</CardTitle>
-                <CardDescription className="text-lg">Plastic bottles sold every minute</CardDescription>
+                <CardDescription className="text-lg">de bouteilles plastique vendues chaque minute</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">Most are used once and discarded, taking 450+ years to decompose.</p>
+                <p className="text-gray-600">La plupart sont utilisées une seule fois puis jetées, mettant 450+ ans à se décomposer.</p>
               </CardContent>
             </Card>
 
@@ -158,25 +186,25 @@ const Index = () => {
                   <HandHeart className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-3xl font-bold text-blue-600">90%</CardTitle>
-                <CardDescription className="text-lg">Of seabirds have plastic in their stomachs</CardDescription>
+                <CardDescription className="text-lg">des oiseaux marins ont du plastique dans l'estomac</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600">Marine life mistakes plastic for food, leading to malnutrition and death.</p>
+                <p className="text-gray-600">La vie marine confond le plastique avec de la nourriture, causant malnutrition et mort.</p>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Quiz Section */}
+      {/* Section Quiz */}
       <section id="quiz" className="py-20 px-4 bg-gradient-to-r from-green-100 to-blue-100">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              How Plastic-Smart Are You?
+              Quiz : Êtes-vous un Expert Anti-Plastique ?
             </h2>
             <p className="text-xl text-gray-600">
-              Take our quick quiz to discover your plastic footprint
+              Testez vos connaissances sur les gestes éco-responsables
             </p>
           </div>
 
@@ -187,10 +215,10 @@ const Index = () => {
                   <div className="mb-6">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium text-gray-600">
-                        Question {quizStep + 1} of {quizQuestions.length}
+                        Question {quizStep + 1} sur {quizQuestions.length}
                       </span>
                       <Badge variant="outline" className="bg-green-50">
-                        Quiz Progress
+                        Quiz Écolo
                       </Badge>
                     </div>
                     <Progress 
@@ -223,8 +251,12 @@ const Index = () => {
                   </div>
                   
                   <h3 className="text-3xl font-bold mb-4 text-gray-800">
-                    You're an {getQuizResult().level}!
+                    Vous êtes un {getQuizResult().level} !
                   </h3>
+                  
+                  <p className="text-lg text-gray-600 mb-4">
+                    Score : {quizScore}/5 points
+                  </p>
                   
                   <p className="text-lg text-gray-600 mb-6">
                     {getQuizResult().message}
@@ -236,13 +268,13 @@ const Index = () => {
                       variant="outline" 
                       className="mr-4"
                     >
-                      Take Quiz Again
+                      Refaire le Quiz
                     </Button>
                     <Button 
                       onClick={() => document.getElementById('tips')?.scrollIntoView({ behavior: 'smooth' })}
                       className="bg-green-500 hover:bg-green-600"
                     >
-                      Get Tips to Improve
+                      Découvrir les Conseils
                     </Button>
                   </div>
                 </div>
@@ -252,55 +284,61 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Tips Section */}
+      {/* Section Conseils */}
       <section id="tips" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Simple Steps, Big Impact
+              7 Gestes Simples, Impact Énorme
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Easy changes you can make today to reduce plastic waste
+              Des changements faciles à adopter dès aujourd'hui pour réduire votre empreinte plastique
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Reusable Water Bottle",
-                description: "Replace 1,000+ plastic bottles per year with one reusable bottle",
+                title: "Gourde Réutilisable",
+                description: "Remplacez plus de 1000 bouteilles plastique par an avec une seule gourde",
                 icon: "💧",
-                category: "Daily Habits"
+                category: "Quotidien"
               },
               {
-                title: "Bring Your Own Bags",
-                description: "Keep reusable bags in your car, purse, or backpack for shopping",
+                title: "Sacs Réutilisables",
+                description: "Gardez des sacs en tissu dans votre voiture, sac à main ou sac à dos",
                 icon: "🛍️",
-                category: "Shopping"
+                category: "Courses"
               },
               {
-                title: "Choose Loose Produce",
-                description: "Skip plastic bags for fruits and vegetables when possible",
+                title: "Achat en Vrac",
+                description: "Évitez les emballages plastique en choisissant les produits en vrac",
                 icon: "🥕",
-                category: "Grocery"
+                category: "Alimentation"
               },
               {
-                title: "Refillable Containers",
-                description: "Use glass or metal containers for food storage and leftovers",
+                title: "Contenants en Verre",
+                description: "Utilisez des récipients en verre ou métal pour conserver vos aliments",
                 icon: "📦",
-                category: "Kitchen"
+                category: "Cuisine"
               },
               {
-                title: "Bamboo Utensils",
-                description: "Carry reusable utensils to avoid single-use plastic cutlery",
+                title: "Couverts en Bambou",
+                description: "Emportez des couverts réutilisables pour éviter le plastique jetable",
                 icon: "🥢",
-                category: "On-the-Go"
+                category: "Nomade"
               },
               {
-                title: "Bar Soap & Shampoo",
-                description: "Switch to package-free soap bars and shampoo bars",
+                title: "Savons Solides",
+                description: "Passez aux savons et shampoings solides sans emballage plastique",
                 icon: "🧼",
-                category: "Personal Care"
+                category: "Hygiène"
+              },
+              {
+                title: "Tri et Recyclage",
+                description: "Triez correctement vos déchets et donnez une seconde vie au plastique",
+                icon: "♻️",
+                category: "Recyclage"
               }
             ].map((tip, index) => (
               <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-0 bg-gradient-to-br from-white to-green-50">
@@ -320,24 +358,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pledge Section */}
+      {/* Section Engagement */}
       <section className="py-20 px-4 bg-gradient-to-r from-green-600 to-blue-600 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Make a Difference?
+            Prêt(e) à Faire la Différence ?
           </h2>
           <p className="text-xl mb-12 text-green-100">
-            Join thousands of people committed to reducing plastic waste
+            Rejoignez des milliers de personnes engagées pour réduire les déchets plastique
           </p>
 
           {!hasPledged ? (
             <Card className="max-w-md mx-auto bg-white/10 backdrop-blur-md border-white/20">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6">Take the Plastic-Free Pledge</h3>
+                <h3 className="text-2xl font-bold mb-6">Je m'engage pour moins de plastique</h3>
                 <div className="space-y-4">
                   <input
                     type="text"
-                    placeholder="Enter your name"
+                    placeholder="Entrez votre prénom"
                     value={pledgeName}
                     onChange={(e) => setPledgeName(e.target.value)}
                     className="w-full p-3 rounded-lg border-0 bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -347,16 +385,17 @@ const Index = () => {
                     className="w-full bg-green-500 hover:bg-green-600 text-white py-3 text-lg font-semibold rounded-lg"
                     disabled={!pledgeName.trim()}
                   >
-                    Make My Pledge
+                    Prendre Mon Engagement
                   </Button>
                 </div>
                 
                 <div className="mt-6 text-sm text-white/80">
-                  <p className="mb-2">I pledge to:</p>
+                  <p className="mb-2">Je m'engage à :</p>
                   <ul className="text-left space-y-1">
-                    <li>• Use reusable bags and water bottles</li>
-                    <li>• Choose products with less packaging</li>
-                    <li>• Share this message with friends</li>
+                    <li>• Utiliser des sacs et gourdes réutilisables</li>
+                    <li>• Choisir des produits avec moins d'emballages</li>
+                    <li>• Partager ce message avec mes proches</li>
+                    <li>• Adopter les gestes éco-responsables au quotidien</li>
                   </ul>
                 </div>
               </CardContent>
@@ -367,23 +406,23 @@ const Index = () => {
                 <HandHeart className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-3xl font-bold mb-4">
-                Thank you for joining the movement!
+                Merci de rejoindre le mouvement !
               </h3>
               <p className="text-xl text-green-100 mb-8">
-                Together, we're creating a cleaner, healthier planet for future generations.
+                Ensemble, nous créons une planète plus propre et plus saine pour les générations futures.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   variant="outline" 
                   className="border-white/30 text-white hover:bg-white/10"
                 >
-                  Share on Social Media
+                  Partager sur les Réseaux
                 </Button>
                 <Button 
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="bg-white/20 hover:bg-white/30 backdrop-blur-md"
                 >
-                  Back to Top
+                  Retour en Haut
                 </Button>
               </div>
             </div>
