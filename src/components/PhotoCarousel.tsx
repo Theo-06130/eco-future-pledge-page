@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import {
   Carousel,
@@ -81,7 +80,13 @@ const PhotoCarousel = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <Carousel setApi={setApi} className="w-full">
+          <Carousel 
+            setApi={setApi} 
+            className="w-full"
+            opts={{
+              loop: true
+            }}
+          >
             <CarouselContent>
               {images.map((image) => (
                 <CarouselItem key={image.id}>
